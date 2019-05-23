@@ -103,10 +103,10 @@ BOOL Re4xManager::initializeInstance()
 		switch (devList[i].Type)
 		{
 		case FT_DEVICE_232H:
-			re4xInterfaces.push_back(new Re4xSPIInterface(pifinfo));
+			//re4xInterfaces.push_back(new Re4xSPIInterface(pifinfo));
 			break;
 		case FT_DEVICE_2232C:
-			re4xInterfaces.push_back(new Re4xHBEInterface(pifinfo));
+			//re4xInterfaces.push_back(new Re4xHBEInterface(pifinfo));
 			break;
 		default:
 			delete pifinfo;

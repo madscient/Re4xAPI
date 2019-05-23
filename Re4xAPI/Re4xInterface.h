@@ -4,11 +4,11 @@
 
 #define BUFSIZE	65536
 
-struct RE4X_INTERFACE_INFO;
+class Re4xManager;
 
 class Re4xInterface : public SoundInterface {
 protected:
-
+	Re4xManager * parentManager;
 	RE4X_INTERFACE_INFO* pInterfaceInfo;
 	int rptr;
 	int wptr;
@@ -22,9 +22,9 @@ protected:
 	virtual FT_STATUS BufferedRead(UINT8* buffer, UINT32 sizeToTransfer, UINT32 cs);
 	virtual FT_STATUS BufferedWrite(UINT8* buffer, UINT32 sizeToTransfer, UINT32 cs) = 0;
 	virtual FT_STATUS FT_WriteGPIO(UINT8 dir, UINT8 value) = 0;
-
 public:
-	Re4xInterface(RE4X_INTERFACE_INFO* pinfo);
+	Re4xInterface();
+	Re4xInterface(Re4xManager* parent, RE4X_INTERFACE_INFO* pinfo);
 	~Re4xInterface();
 	RE4X_INTERFACE_INFO* getInterfaceInfo();
 	Re4xInterface* getInterface();

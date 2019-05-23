@@ -1,9 +1,86 @@
 #include "stdafx.h"
 #include "Re4xInterface.h"
+#include "Re4xManager.h"
 
-Re4xInterface::Re4xInterface(RE4X_INTERFACE_INFO* pinfo) : pInterfaceInfo(pinfo)
+Re4xInterface::Re4xInterface() : pInterfaceInfo(nullptr), parentManager(nullptr)
+{
+
+}
+
+Re4xInterface::Re4xInterface(Re4xManager* parent, RE4X_INTERFACE_INFO* pinfo) :
+	pInterfaceInfo(pinfo), parentManager(parent)
 {
 	InitInstance();
+}
+
+Re4xInterface::~Re4xInterface()
+{
+}
+
+RE4X_INTERFACE_INFO * Re4xInterface::getInterfaceInfo()
+{
+	return pInterfaceInfo;
+}
+
+Re4xInterface * Re4xInterface::getInterface()
+{
+	if (pInterfaceInfo != nullptr) {
+		pInterfaceInfo->inUse = true;
+	}
+	return this;
+}
+
+BOOL Re4xInterface::releaseInterface()
+{
+	if (pInterfaceInfo != nullptr) {
+		pInterfaceInfo->inUse = false;
+	}
+	return 0;
+}
+
+BOOL Re4xInterface::isSupportLowLevelApi()
+{
+	return true;
+}
+
+BOOL Re4xInterface::setData(BYTE * pData, DWORD dSendDataLen)
+{
+	return 0;
+}
+
+DWORD Re4xInterface::getData(BYTE * pData, DWORD dGetDataLen)
+{
+	return 0;
+}
+
+BOOL Re4xInterface::setDelay(DWORD dDelay)
+{
+	return 0;
+}
+
+DWORD Re4xInterface::getDelay()
+{
+	return 0;
+}
+
+BOOL Re4xInterface::reset()
+{
+	return 0;
+}
+
+BOOL Re4xInterface::init()
+{
+	return 0;
+}
+
+DWORD Re4xInterface::getSoundChipCount()
+{
+	return 0;
+}
+
+SoundChip * Re4xInterface::getSoundChip(DWORD dNum)
+{
+	return nullptr;
 }
 
 void Re4xInterface::BufferPush(BYTE data)
@@ -44,12 +121,4 @@ FT_STATUS Re4xInterface::BufferedRead(UINT8 * buffer, UINT32 sizeToTransfer, UIN
 
 
 
-
-Re4xSPIInterface::Re4xInterface(RE4X_INTERFACE_INFO* pinfo) : Re4xInterface(pinfo)
-{
-}
-
-Re4xHBEInterface::Re4xInterface(RE4X_INTERFACE_INFO* pinfo) : Re4xInterface(pinfo)
-{
-}
 

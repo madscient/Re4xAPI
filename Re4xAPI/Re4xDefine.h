@@ -57,7 +57,7 @@ enum RE4X_CHIP_TYPE {
 	RE4X_TYPE_MAX = 0xffffffff,
 };
 
-typedef struct
+struct RE4X_INTERFACE_INFO
 {
 	SCCI_INTERFACE_INFO scciInterfaceInfo;
 	FT_HANDLE ftHandle;
@@ -66,12 +66,12 @@ typedef struct
 	int ftIndex;
 	char ftDescription[128];
 	char ftSerial_no[128];
-} RE4X_INTERFACE_INFO;
+};
 
-typedef struct
+struct RE4X_SOUND_CHIP_INFO
 {
 	SCCI_SOUND_CHIP_INFO scciSoundChipInfo;
 	RE4X_CHIP_TYPE chipType;
 	DWORD chipClock;
 	BOOL inUse;
-} RE4X_SOUND_CHIP_INFO;
+};

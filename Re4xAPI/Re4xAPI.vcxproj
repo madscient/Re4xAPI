@@ -151,6 +151,7 @@
     <ClInclude Include="Re4xDefine.h" />
     <ClInclude Include="Re4xInterface.h" />
     <ClInclude Include="Re4xManager.h" />
+    <ClInclude Include="Re4xSoundChip.h" />
     <ClInclude Include="scci.h" />
     <ClInclude Include="SCCIDefines.h" />
     <ClInclude Include="stdafx.h" />
@@ -161,6 +162,7 @@
     <ClCompile Include="Re4xAPI.cpp" />
     <ClCompile Include="Re4xInterface.cpp" />
     <ClCompile Include="Re4xManager.cpp" />
+    <ClCompile Include="Re4xSoundChip.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
