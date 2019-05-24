@@ -13,22 +13,23 @@ protected:
 	int rptr;
 	int wptr;
 	BYTE cmdbuf[BUFSIZE];
-	virtual void BufferPush(BYTE data);
-	virtual void BufferPush(BYTE* buf, UINT32 length);
-	virtual FT_STATUS BufferFlush();
+	virtual void __stdcall BufferPush(BYTE data);
+	virtual void __stdcallBufferPush(BYTE* buf, UINT32 length);
+	virtual FT_STATUS __stdcall BufferFlush();
 	//to be implemented on derived class
-	virtual FT_STATUS InitInstance() { return FT_NOT_SUPPORTED; };
-	virtual void InitialClear() = 0;
-	virtual FT_STATUS BufferedRead(UINT8* buffer, UINT32 sizeToTransfer, UINT32 cs);
-	virtual FT_STATUS BufferedWrite(UINT8* buffer, UINT32 sizeToTransfer, UINT32 cs) = 0;
-	virtual FT_STATUS FT_WriteGPIO(UINT8 dir, UINT8 value) = 0;
+	virtual FT_STATUS __stdcall InitInstance() { return FT_NOT_SUPPORTED; };
+	virtual void __stdcall InitialClear() = 0;
+	virtual FT_STATUS __stdcall BufferedRead(UINT8* buffer, UINT32 sizeToTransfer, UINT32 cs);
+	virtual FT_STATUS __stdcall BufferedWrite(UINT8* buffer, UINT32 sizeToTransfer, UINT32 cs) = 0;
+	virtual FT_STATUS __stdcall FT_WriteGPIO(UINT8 dir, UINT8 value) = 0;
 public:
 	Re4xInterface();
 	Re4xInterface(Re4xManager* parent, RE4X_INTERFACE_INFO* pinfo);
 	~Re4xInterface();
-	RE4X_INTERFACE_INFO* getInterfaceInfo();
-	Re4xInterface* getInterface();
-	BOOL releaseInterface();
+	RE4X_INTERFACE_INFO* __stdcall getInterfaceInfo();
+	Re4xInterface* __stdcall getInterface();
+	BOOL __stdcall releaseInterface();
+	virtual int __stdcall getSlotCount() = 0;
 	///
 	///implementation for SoundInterface
 	///
