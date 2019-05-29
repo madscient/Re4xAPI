@@ -14,7 +14,7 @@ protected:
 	int wptr;
 	BYTE cmdbuf[BUFSIZE];
 	virtual void __stdcall BufferPush(BYTE data);
-	virtual void __stdcallBufferPush(BYTE* buf, UINT32 length);
+	virtual void __stdcall BufferPush(BYTE* buf, UINT32 length);
 	virtual FT_STATUS __stdcall BufferFlush();
 	//to be implemented on derived class
 	virtual FT_STATUS __stdcall InitInstance() { return FT_NOT_SUPPORTED; };
@@ -57,8 +57,32 @@ class Re4xSPIInterface : public Re4xInterface
 {
 protected:
 	virtual FT_STATUS InitInstance();
+	virtual FT_STATUS __stdcall BufferedWrite(UINT8* buffer, UINT32 sizeToTransfer, UINT32 cs);
+	virtual FT_STATUS __stdcall FT_WriteGPIO(UINT8 dir, UINT8 value);
 public:
 	Re4xSPIInterface(RE4X_INTERFACE_INFO* pinfo);
+	virtual int __stdcall getSlotCount();
+	///
+	///implementation for SoundInterface
+	///
+	// support low level API check
+	virtual BOOL __stdcall isSupportLowLevelApi();
+	// send data to interface
+	virtual BOOL __stdcall setData(BYTE *pData, DWORD dSendDataLen);
+	// get data from interface
+	virtual DWORD __stdcall getData(BYTE *pData, DWORD dGetDataLen);
+	// set delay time
+	virtual	BOOL __stdcall setDelay(DWORD dDelay);
+	// get delay time
+	virtual DWORD __stdcall getDelay();
+	// reset interface
+	virtual BOOL __stdcall reset();
+	// initialize sound chips
+	virtual BOOL __stdcall init();
+	// サウンドチップ数取得
+	virtual DWORD	__stdcall getSoundChipCount();
+	// サウンドチップ取得
+	virtual	SoundChip* __stdcall getSoundChip(DWORD dNum);
 };
 
 class Re4xHBEInterface : public Re4xInterface

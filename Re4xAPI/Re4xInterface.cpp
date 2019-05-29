@@ -17,12 +17,12 @@ Re4xInterface::~Re4xInterface()
 {
 }
 
-RE4X_INTERFACE_INFO * Re4xInterface::getInterfaceInfo()
+RE4X_INTERFACE_INFO * __stdcall Re4xInterface::getInterfaceInfo()
 {
 	return pInterfaceInfo;
 }
 
-Re4xInterface * Re4xInterface::getInterface()
+Re4xInterface * __stdcall Re4xInterface::getInterface()
 {
 	if (pInterfaceInfo != nullptr) {
 		pInterfaceInfo->inUse = true;
@@ -30,7 +30,7 @@ Re4xInterface * Re4xInterface::getInterface()
 	return this;
 }
 
-BOOL Re4xInterface::releaseInterface()
+BOOL __stdcall Re4xInterface::releaseInterface()
 {
 	if (pInterfaceInfo != nullptr) {
 		pInterfaceInfo->inUse = false;
@@ -38,37 +38,37 @@ BOOL Re4xInterface::releaseInterface()
 	return 0;
 }
 
-BOOL Re4xInterface::isSupportLowLevelApi()
+BOOL __stdcall Re4xInterface::isSupportLowLevelApi()
 {
 	return true;
 }
 
-BOOL Re4xInterface::setData(BYTE * pData, DWORD dSendDataLen)
+BOOL __stdcall Re4xInterface::setData(BYTE * pData, DWORD dSendDataLen)
 {
 	return 0;
 }
 
-DWORD Re4xInterface::getData(BYTE * pData, DWORD dGetDataLen)
+DWORD __stdcall Re4xInterface::getData(BYTE * pData, DWORD dGetDataLen)
 {
 	return 0;
 }
 
-BOOL Re4xInterface::setDelay(DWORD dDelay)
+BOOL __stdcall Re4xInterface::setDelay(DWORD dDelay)
 {
 	return 0;
 }
 
-DWORD Re4xInterface::getDelay()
+DWORD __stdcall Re4xInterface::getDelay()
 {
 	return 0;
 }
 
-BOOL Re4xInterface::reset()
+BOOL __stdcall Re4xInterface::reset()
 {
 	return 0;
 }
 
-BOOL Re4xInterface::init()
+BOOL __stdcall Re4xInterface::init()
 {
 	return 0;
 }
@@ -78,25 +78,25 @@ DWORD Re4xInterface::getSoundChipCount()
 	return 0;
 }
 
-SoundChip * Re4xInterface::getSoundChip(DWORD dNum)
+SoundChip * __stdcall Re4xInterface::getSoundChip(DWORD dNum)
 {
 	return nullptr;
 }
 
-void Re4xInterface::BufferPush(BYTE data)
+void __stdcall Re4xInterface::BufferPush(BYTE data)
 {
 	cmdbuf[wptr++] = data;
 	if (wptr == (BUFSIZE - 1)) { BufferFlush(); }
 }
 
-void Re4xInterface::BufferPush(BYTE * buf, UINT32 length)
+void __stdcall Re4xInterface::BufferPush(BYTE * buf, UINT32 length)
 {
 	if ((wptr + length) >= (BUFSIZE - 1)) { BufferFlush(); }
 	memcpy(&cmdbuf[wptr], buf, length);
 	wptr += length;
 }
 
-FT_STATUS Re4xInterface::BufferFlush()
+FT_STATUS __stdcall Re4xInterface::BufferFlush()
 {
 	FT_STATUS ret = FT_OTHER_ERROR;
 	DWORD written = 0;
@@ -113,7 +113,7 @@ FT_STATUS Re4xInterface::BufferFlush()
 	return ret;
 }
 
-FT_STATUS Re4xInterface::BufferedRead(UINT8 * buffer, UINT32 sizeToTransfer, UINT32 cs)
+FT_STATUS __stdcall Re4xInterface::BufferedRead(UINT8 * buffer, UINT32 sizeToTransfer, UINT32 cs)
 {
 	return FT_OK;
 }
